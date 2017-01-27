@@ -1,0 +1,7 @@
+* {
+    font-family: monospace;
+}
+
+#first-clicker:disabled {
+    opacity: 0.5;
+}
