@@ -2,6 +2,65 @@
     font-family: monospace;
 }
 
+.container {
+    text-align: center;
+    border: 1px solid black;
+    margin-top: 25px;
+    padding: 25px;
+
+}
+
+
 #first-clicker:disabled {
     opacity: 0.5;
+}
+
+.image {
+    margin: 0 auto;
+
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#clicker {
+    width: 75%;
+}
+
+#clicker:hover {
+    cursor: pointer;
+    width: 74%;
+}
+
+#clicker:active {
+    cursor: pointer;
+    width: 76%;
+}
+
+.buttons {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.saveLoadButtons {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.button {
+    margin: 10px;
+    padding: 10px;
+}
+
+#counter {
+    font-size: 25px;
 }

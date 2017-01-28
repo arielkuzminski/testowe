@@ -75,14 +75,18 @@ function PizzaClickerGame() {
             
            }
         else {
-            localStorage.setItem('pizzaCount', 0);
-            localStorage.setItem('autoClick', 0);
-            localStorage.setItem('firstClickerCost', 0);
-            localStorage.setItem('n', 0);
+            this.reset();
         };
     
         this.update();
     };
+    
+    this.reset = function() {
+        localStorage.setItem('pizzaCount', 0);
+        localStorage.setItem('autoClick', 0);
+        localStorage.setItem('firstClickerCost', 2);
+        localStorage.setItem('n', 0);
+    }
 
     this.changeCost = function() {
         
@@ -130,6 +134,12 @@ $('#save').on('click', function(){
 });
 
 $('#load').on('click', function(){
+    Clicker.load();
+    
+});
+
+$('#reset').on('click', function(){
+    Clicker.reset();
     Clicker.load();
     
 });

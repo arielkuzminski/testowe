@@ -13,19 +13,23 @@
   <body>
       <div class="container">
           <h1>Pizza Clicker</h1>
-          <button id="clicker">Click me!</button>
-          <p>Masz: <span id='counter'></span> pizz</p>
-          
-          <div class="autoClicks">
-              <div class="autoClick">
-                <button type="button" id="first-clicker" >Auto Click 1</button> Costs: <span class="value first-clicker"></span>
-              </div>
-          
+          <div class="image">
+            <a><img id="clicker" src="img/pizza.svg"/></a>
           </div>
-          <button id="save">Save</button>
-          <button id="load">Load</button>
-            
-      
+          <p>You've got: <span id='counter'></span> pizzas!</p>
+          
+          <div class="buttons">
+              <div class="autoClicks">
+                  <div class="autoClick">
+                    <button type="button" class="btn btn-default button" id="first-clicker" >Better Cheese</button> Costs: <span class="value first-clicker"></span>
+                  </div>
+              </div>
+           <div class="saveLoadButtons">
+            <button class="btn btn-success button" id="save">Save</button>
+            <button class="btn btn-danger button" id="load">Load</button>
+           </div> 
+          </div>
+          <button id="reset">RESET</button>
       </div>
       
     <script src="./js/jquery.min.js"></script>
