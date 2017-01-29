@@ -17,11 +17,17 @@
             <a><img id="clicker" src="img/pizza.svg"/></a>
           </div>
           <p>You've got: <span id='counter'></span> pizzas!</p>
+          <p>(<span id='perSec'></span> per/second)</p>
           
           <div class="buttons">
               <div class="autoClicks">
-                  <div class="autoClick">
-                    <button type="button" class="btn btn-default button" id="first-clicker" >Better Cheese</button> Costs: <span class="value first-clicker"></span>
+                  <div class="autoClick pizzerman">
+                    <button type="button" class="btn btn-default button" id="pizzerman" >Pizzerman</button> Costs: <span id="pizzerman-value"></span>
+                    <p>You've got <span id="pizzaViewCount"></span> pizzermen</p>
+                  </div>
+                  <div class="autoClick waitress">
+                    <button type="button" class="btn btn-default button" id="waitress" >Waitress</button> Costs: <span id="waitress-value"></span>
+                    <p>You've got <span id="waitressViewCount"></span> waitresses</p>
                   </div>
               </div>
            <div class="saveLoadButtons">
