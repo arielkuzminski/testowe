@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>No pizza</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
-  </head>
-  <body>
-      <div class="container">
-        <div class="col-md-4">
-          
-              
-        </div>
+</head>
+<body>
+<div class="container">
+    <div class="col-md-4">
 
-        <div class="col-md-4">
-            <h1>Pizza Clicker</h1>
-            <div class="image">
-                <a><img id="clicker" src="img/pizza.svg"/></a>
-            </div>
-            <p>You've got: <span id='counter'></span> pizzas!</p>
-            <p>(<span id='perSec'></span> per/second)</p>
+
+    </div>
+
+    <div class="col-md-4">
+        <h1>Pizza Clicker</h1>
+        <div class="image">
+            <a><img id="clicker" src="img/pizza.svg"/></a>
         </div>
-        <div class="col-md-4">
-          <div class="buttons">
-              <div class="autoClicks">
-                  <div class="autoClick pizzerman">
+        <p>You've got: <span id='counter'></span> pizzas!</p>
+        <p>(<span id='perSec'></span> per/second)</p>
+    </div>
+    <div class="col-md-4">
+        <div class="buttons">
+            <div class="autoClicks">
+                <div class="autoClick pizzerman">
                     <button type="button" class="btn btn-default button" id="pizzerman" >Pizzerman</button> Costs: <span id="pizzerman-value"></span>
                     <p>You've got <span id="pizzaViewCount"></span> Pizzermen</p>
-                  </div>
-                  <div class="autoClick waitress">
+                </div>
+                <div class="autoClick waitress">
                     <button type="button" class="btn btn-default button" id="waitress" >Waitress</button> Costs: <span id="waitress-value"></span>
                     <p>You've got <span id="waitressViewCount"></span> Waitresses</p>
-                  </div>
-                  <div class="autoClick deliveryboy">
+                </div>
+                <div class="autoClick deliveryboy">
                     <button type="button" class="btn btn-default button" id="deliveryboy" >Delivery Boy</button> Costs: <span id="deliveryboy-value"></span>
                     <p>You've got <span id="deliveryboyViewCount"></span> Delivery Boys</p>
-                  </div>
-                  <div class="autoClick manager">
+                </div>
+                <div class="autoClick manager">
                     <button type="button" class="btn btn-default button" id="manager" >Manager</button> Costs: <span id="manager-value"></span>
                     <p>You've got <span id="managerViewCount"></span> Managers</p>
-                  </div>
-              </div>
-              <div class="saveLoadButtons">
+                </div>
+            </div>
+            <div class="saveLoadButtons">
                 <button class="btn btn-success button" id="save">Save</button>
                 <button class="btn btn-warning button" id="load">Load</button>
                 <button class="btn btn-danger button "id="reset">RESET</button>
-              </div> 
-          </div>
+            </div>
         </div>
-      </div>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/angular.min.js"></script>
-	<script src="./js/app.js"></script>
-  </body>
+    </div>
+</div>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="./node_modules/angular/angular.min.js"></script>
+
+<script src="./js/app.js"></script>
+</body>
 </html>
