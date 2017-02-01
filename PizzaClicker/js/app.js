@@ -25,8 +25,8 @@ function PizzaClickerGame() {
             idValue : '#waitress-value',
             idCount : '#waitressViewCount',
             itemCount : 0,
-            currentPrice : 100,
-            basePrice: 100,
+            currentPrice : 150,
+            basePrice: 150,
             bonus : 10
         },
         
@@ -37,9 +37,9 @@ function PizzaClickerGame() {
             idValue : '#deliveryboy-value',
             idCount : '#deliveryboyViewCount',
             itemCount : 0,
-            currentPrice : 1000,
-            basePrice: 1000,
-            bonus : 100
+            currentPrice : 3000,
+            basePrice: 3000,
+            bonus : 200
         },
         
         {
@@ -49,10 +49,22 @@ function PizzaClickerGame() {
             idValue : '#manager-value',
             idCount : '#managerViewCount',
             itemCount : 0,
-            currentPrice : 10000,
-            basePrice: 10000,
-            bonus : 1000
+            currentPrice : 75000,
+            basePrice: 75000,
+            bonus : 5000
         },
+        
+        {
+            name : 'godfather',
+            type : 'upgrades',
+            id : '#godfather',
+            idValue : '#godfather-value',
+            idCount : '#godfatherViewCount',
+            itemCount : 0,
+            currentPrice : 1000000,
+            basePrice: 1000000,
+            bonus : 123456
+        }
         
     ];
     
@@ -66,8 +78,8 @@ function PizzaClickerGame() {
             idValue : '#cursor-value',
             idCount : '#cursorCount',
             itemCount : 0,
-            currentPrice : 10,
-            basePrice: 10,
+            currentPrice : 100,
+            basePrice: 100,
             bonus : 1
         },
         
@@ -78,8 +90,8 @@ function PizzaClickerGame() {
             idValue : '#rollingPin-value',
             idCount : '#rollingPinCount',
             itemCount : 0,
-            currentPrice : 100,
-            basePrice: 100,
+            currentPrice : 500,
+            basePrice: 500,
             bonus : 5
         },
         
@@ -90,8 +102,8 @@ function PizzaClickerGame() {
             idValue : '#pizzaBox-value',
             idCount : '#pizzaBoxCount',
             itemCount : 0,
-            currentPrice : 1000,
-            basePrice: 1000,
+            currentPrice : 2000,
+            basePrice: 2000,
             bonus : 20
         },
         
@@ -141,7 +153,7 @@ function PizzaClickerGame() {
                 pizzaCount = pizzaCount - currentUpgrade.currentPrice;                                                  // aktualizujemy nasze 'saldo'
                 booster = booster + currentUpgrade.bonus;                                                         // aktualizujemy liczbę automatycznych kliknięć
                 currentUpgrade.itemCount++;                                                                             // inkrementujemy licznik tego konkretnego ulepszenia
-                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(2, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
+                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(1.15, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
                 currentUpgrade.currentPrice = Math.round(currentUpgrade.currentPrice);                                  // żeby był int a nie float
 
                 update();
@@ -342,6 +354,10 @@ function PizzaClickerGame() {
             clickUpgrade(upgrades[3]);
         } );
         
+        $( document ).on( 'click', '#godfather', function() {
+            clickUpgrade(upgrades[4]);
+        } );
+        
         $( document ).on( 'click', '#cursor', function() {
             clickUpgrade(clickerUpgrades[0]);
         } );
@@ -387,9 +403,22 @@ function PizzaClickerGame() {
 
     };
     
+    // buttony domyślnie ustawione na disabled
+    var disableButtons = function() {
+        
+        for(var i = 0; i < upgrades.length; i++) {
+            $(upgrades[i].id).attr("disabled", true);
+        } 
+        
+        for(var i = 0; i < clickerUpgrades.length; i++) {
+            $(clickerUpgrades[i].id).attr("disabled", true);
+        }
+    };
+    
     
     var construct = function() {                                   // konstruktor
         events();
+        disableButtons();
         load();                                                // wczytywanie danych z localStorage po wejściu na stronę - 1000ms / 30fps = 33
         setInterval(update, 500);                             // wywołanie metody aktualizującej dane na stronie co 1 sekundę - 1000ms / 30fps = 33
         setInterval(updateTitle, 500);
@@ -397,7 +426,6 @@ function PizzaClickerGame() {
         setInterval(save, 60000);                              // autozapis co 60 sekund
         setInterval(updateAutoClicks, 1000);                   // TO DO // nie wolno zmieniać wartości, inaczej wszystko się psuje :( :( :(
         
-        $('#pizzerman').attr("disabled", true);                     // buttony domyślnie ustawione na disabled
         
     }
     
