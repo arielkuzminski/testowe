@@ -2,11 +2,13 @@ function PizzaClickerGame() {
 
     var pizzaCount = 0;                                         // główny licznik - liczba pizz :)
     var autoClick = 0;                                          // licznik automatycznych kliknięć na sekundę
+    var booster = 0;
     
     
     var upgrades = [                                                // każde z ulepszeń
         {
             name : 'pizzerman',
+            type : 'upgrades',
             id : '#pizzerman',                                  //aby móc akutalizować wyniki na stronie
             idValue : '#pizzerman-value',                       // j.w
             idCount : '#pizzaViewCount',                        // do wzoru na koszt kolejnego ulepszenia
@@ -18,6 +20,7 @@ function PizzaClickerGame() {
         
         {
             name : 'waitress',
+            type : 'upgrades',
             id : '#waitress',
             idValue : '#waitress-value',
             idCount : '#waitressViewCount',
@@ -29,6 +32,7 @@ function PizzaClickerGame() {
         
         {
             name : 'deliveryboy',
+            type : 'upgrades',
             id : '#deliveryboy',
             idValue : '#deliveryboy-value',
             idCount : '#deliveryboyViewCount',
@@ -40,6 +44,7 @@ function PizzaClickerGame() {
         
         {
             name : 'manager',
+            type : 'upgrades',
             id : '#manager',
             idValue : '#manager-value',
             idCount : '#managerViewCount',
@@ -49,22 +54,64 @@ function PizzaClickerGame() {
             bonus : 1000
         },
         
+    ];
+    
+    
+    var clickerUpgrades = [
+        
         {
-            name : 'sszef',
-            id : '#manager',
-            idValue : '#manager-value',
-            idCount : '#managerViewCount',
+            name : 'cursor',
+            type : 'clickUpgrades',
+            id : '#cursor',
+            idValue : '#cursor-value',
+            idCount : '#cursorCount',
+            itemCount : 0,
+            currentPrice : 10,
+            basePrice: 10,
+            bonus : 1
+        },
+        
+        {
+            name : 'rollingPin',
+            type : 'clickUpgrades',
+            id : '#rollingPin',
+            idValue : '#rollingPin-value',
+            idCount : '#rollingPinCount',
+            itemCount : 0,
+            currentPrice : 100,
+            basePrice: 100,
+            bonus : 5
+        },
+        
+        {
+            name : 'pizzaBox',
+            type : 'clickUpgrades',
+            id : '#pizzaBox',
+            idValue : '#pizzaBox-value',
+            idCount : '#pizzaBoxCount',
+            itemCount : 0,
+            currentPrice : 1000,
+            basePrice: 1000,
+            bonus : 20
+        },
+        
+        {
+            name : 'briefcase',
+            type : 'clickUpgrades',
+            id : '#briefcase',
+            idValue : '#briefcase-value',
+            idCount : '#briefcaseCount',
             itemCount : 0,
             currentPrice : 10000,
             basePrice: 10000,
-            bonus : 1000
+            bonus : 100
         }
     ];
-    
 
     var clickClicker = function() {                            //kliknięcie w clicker...
         
         pizzaCount++;
+        pizzaCount = pizzaCount + booster;
         update();
         
     };
@@ -74,17 +121,35 @@ function PizzaClickerGame() {
         
         update();                                          //wywołanie funkcji aktualizującej wyświetlanie danych na stronie
         
-        
+        if(currentUpgrade.type == 'upgrades') {
             
-        if(pizzaCount >= currentUpgrade.currentPrice) {                                                             // jeżeli mamy więcej pizz niż kosztuje ulepszenie, to:
-            pizzaCount = pizzaCount - currentUpgrade.currentPrice;                                                  //aktualizujemy nasze 'saldo'
-            autoClick = autoClick + currentUpgrade.bonus;                                                           // aktualizujemy liczbę automatycznych kliknięć
-            currentUpgrade.itemCount++;                                                                             // inkrementujemy licznik tego konkretnego ulepszenia
-            currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(1.15, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
-            currentUpgrade.currentPrice = Math.round(currentUpgrade.currentPrice);                                  // żeby był int a nie float
+            if (pizzaCount >= currentUpgrade.currentPrice) {                                                         // jeżeli mamy więcej pizz niż kosztuje ulepszenie, to:
+                pizzaCount = pizzaCount - currentUpgrade.currentPrice;                                                  // aktualizujemy nasze 'saldo'
+                autoClick = autoClick + currentUpgrade.bonus;                                                           // aktualizujemy liczbę automatycznych kliknięć
+                currentUpgrade.itemCount++;                                                                             // inkrementujemy licznik tego konkretnego ulepszenia
+                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(1.15, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
+                currentUpgrade.currentPrice = Math.round(currentUpgrade.currentPrice);                                  // żeby był int a nie float
+
+                update();
+
+            }
             
-            update();
         }
+        else if (currentUpgrade.type == 'clickUpgrades') {
+            
+            if (pizzaCount >= currentUpgrade.currentPrice) {                                                         // jeżeli mamy więcej pizz niż kosztuje ulepszenie, to:
+                pizzaCount = pizzaCount - currentUpgrade.currentPrice;                                                  // aktualizujemy nasze 'saldo'
+                booster = booster + currentUpgrade.bonus;                                                         // aktualizujemy liczbę automatycznych kliknięć
+                currentUpgrade.itemCount++;                                                                             // inkrementujemy licznik tego konkretnego ulepszenia
+                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(2, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
+                currentUpgrade.currentPrice = Math.round(currentUpgrade.currentPrice);                                  // żeby był int a nie float
+
+                update();
+
+            }
+        }
+            
+
         
     };
 
@@ -113,6 +178,17 @@ function PizzaClickerGame() {
                 $(upgrades[i].id).attr("disabled", true);
             }
         }
+        
+        for(var i = 0; i < clickerUpgrades.length; i++) {
+            
+            if(pizzaCount >= clickerUpgrades[i].currentPrice) {
+                $(clickerUpgrades[i].id).attr("disabled", false);
+            }
+            
+            else {
+                $(clickerUpgrades[i].id).attr("disabled", true);
+            }
+        }
     };
 
     var update = function() {                                      // metoda często wywoływana - odpowiedzialna za aktualizacje danych wyświetlanych na stronie
@@ -122,9 +198,16 @@ function PizzaClickerGame() {
         for(var i = 0; i < upgrades.length; i++) {
             $(upgrades[i].idValue).text(upgrades[i].currentPrice);  // aktualizacja wyświetlenia aktualnej ceny ulepszenia
             $(upgrades[i].idCount).text(upgrades[i].itemCount);     // aktualizacja wyświetlenia aktualnej ilości posiadanych ulepszeń
+            
         }
-        $('#perSec').text(autoClick);                               // automatycznych kliknięć na sekundę
         
+        for(var i = 0; i < clickerUpgrades.length; i++) {
+            $(clickerUpgrades[i].idValue).text(clickerUpgrades[i].currentPrice);
+            $(clickerUpgrades[i].idCount).text(clickerUpgrades[i].itemCount);
+        }
+        
+        $('#perSec').text(autoClick);                               // automatycznych kliknięć na sekundę
+        $('#perClick').text(booster + 1);
     };
     
     ////////@@@@@@@@@@@@@@@@@@///////// TO DO ////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@///////////////////
@@ -138,11 +221,18 @@ function PizzaClickerGame() {
     var save = function() {                                        //metoda zapisująca postęp gry do localStorage
         localStorage.setItem('pizzaCount', pizzaCount);
         localStorage.setItem('autoClick', autoClick);
+        localStorage.setItem('booster', booster);
         
         for(var i = 0; i < upgrades.length; i++) {
             localStorage.setItem(upgrades[i].name + 'Cost', upgrades[i].currentPrice);
             localStorage.setItem(upgrades[i].name + 'Count', upgrades[i].itemCount);
         }
+        
+        for(var i = 0; i < clickerUpgrades.length; i++) {
+            localStorage.setItem(clickerUpgrades[i].name + 'Cost', clickerUpgrades[i].currentPrice);
+            localStorage.setItem(clickerUpgrades[i].name + 'Count', clickerUpgrades[i].itemCount);
+        }
+        
         console.log('zapisano');
 
     };
@@ -162,11 +252,22 @@ function PizzaClickerGame() {
                 upgrades[i].itemCount = parseInt(upgrades[i].itemCount);
             }
             
+            for(var i = 0; i < clickerUpgrades.length; i++) {
+                
+                clickerUpgrades[i].currentPrice = localStorage.getItem(clickerUpgrades[i].name + 'Cost');
+                clickerUpgrades[i].currentPrice = parseInt(clickerUpgrades[i].currentPrice);
+                clickerUpgrades[i].itemCount = localStorage.getItem(clickerUpgrades[i].name + 'Count');
+                clickerUpgrades[i].itemCount = parseInt(clickerUpgrades[i].itemCount);
+            }
+            
             pizzaCount = localStorage.getItem('pizzaCount');
             pizzaCount = parseInt(pizzaCount);
             
             autoClick = localStorage.getItem('autoClick');
             autoClick = parseInt(autoClick);
+            
+            booster = localStorage.getItem('booster');
+            booster = parseInt(booster);
             
            }
         else {                                                      // ... w przeciwnym wypadku zresetuj wynik
@@ -178,13 +279,23 @@ function PizzaClickerGame() {
     
     var reset = function() {                                       // metoda resetująca grę
         
-        for(var i = 0; i < upgrades.length; i++) {
-            
-            localStorage.setItem('pizzaCount', 0);
-            localStorage.setItem('autoClick', 0);
+        localStorage.clear();
+        
+        localStorage.setItem('pizzaCount', 0);
+        localStorage.setItem('autoClick', 0);
+        localStorage.setItem('booster', 0);
+		
+		for(var i = 0; i < upgrades.length; i++) {
             
             localStorage.setItem(upgrades[i].name + 'Cost', upgrades[i].basePrice);
             localStorage.setItem(upgrades[i].name + 'Count', 0);
+            
+        }
+        
+        for(var i = 0; i < clickerUpgrades.length; i++) {
+            
+            localStorage.setItem(clickerUpgrades[i].name + 'Cost', clickerUpgrades[i].basePrice);
+            localStorage.setItem(clickerUpgrades[i].name + 'Count', 0);
             
         }
     }
@@ -210,6 +321,22 @@ function PizzaClickerGame() {
         $( document ).on( 'click', '#manager', function() {
             clickUpgrade(upgrades[3]);
         } );
+        
+        $( document ).on( 'click', '#cursor', function() {
+            clickUpgrade(clickerUpgrades[0]);
+        } );
+        
+        $( document ).on( 'click', '#rollingPin', function() {
+            clickUpgrade(clickerUpgrades[1]);
+        } );
+        
+        $( document ).on( 'click', '#pizzaBox', function() {
+            clickUpgrade(clickerUpgrades[2]);
+        } );
+        
+        $( document ).on( 'click', '#briefcase', function() {
+            clickUpgrade(clickerUpgrades[3]);
+        } );
 
         $( document ).on( 'click', '#save', save );
 
@@ -223,13 +350,11 @@ function PizzaClickerGame() {
     };
     
     
-    
-    
     var construct = function() {                                   // konstruktor
         events();
-        load();                                                // wczytywanie danych z localStorage po wejściu na stronę
-        setInterval(update, 1);                             // wywołanie metody aktualizującej dane na stronie co 1 sekundę
-        setInterval(checkPizza, 100);                          // wywołanie metody sprawdzającej czy można się wklikać w dane ulepszenie czy nie co 0.1s
+        load();                                                // wczytywanie danych z localStorage po wejściu na stronę - 1000ms / 30fps = 33
+        setInterval(update, 33);                             // wywołanie metody aktualizującej dane na stronie co 1 sekundę - 1000ms / 30fps = 33
+        setInterval(checkPizza, 33);                          // wywołanie metody sprawdzającej czy można się wklikać w dane ulepszenie czy nie co 0.1s
         setInterval(save, 60000);                              // autozapis co 60 sekund
         setInterval(updateAutoClicks, 1000);                   // TO DO // nie wolno zmieniać wartości, inaczej wszystko się psuje :( :( :(
         
