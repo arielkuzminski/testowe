@@ -192,7 +192,6 @@ function PizzaClickerGame() {
     };
 
     var update = function() {                                      // metoda często wywoływana - odpowiedzialna za aktualizacje danych wyświetlanych na stronie
-        $('title').text(pizzaCount + ' pizzas!');
         $('#counter').text(pizzaCount);
         
         for(var i = 0; i < upgrades.length; i++) {
@@ -208,6 +207,13 @@ function PizzaClickerGame() {
         
         $('#perSec').text(autoClick);                               // automatycznych kliknięć na sekundę
         $('#perClick').text(booster + 1);
+    };
+    
+    var updateTitle = function() {
+      
+        update();
+        $('title').text(pizzaCount + ' pizzas!');
+        
     };
     
     ////////@@@@@@@@@@@@@@@@@@///////// TO DO ////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@///////////////////
@@ -300,6 +306,20 @@ function PizzaClickerGame() {
         }
     }
     
+    
+    var changeBg = function(color) {
+        var color = color;
+        $( 'body' ).css('background', color);
+    }
+    
+    var changeFontColor = function(fontColor) {
+        $( 'body' ).css('color', fontColor);
+    }
+    
+    var setCurrentColor = function(currentColor) {
+        $('#currentColor').text(currentColor);
+    }
+    
     var events = function() {
 
 //        var ev = this;
@@ -347,14 +367,33 @@ function PizzaClickerGame() {
             load();
         });
         
+        $( document ).on( 'click', '#fancy', function() {
+            changeFontColor('#333');
+            changeBg('-webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%)');
+            setCurrentColor('fancy');
+        });
+        
+        $( document ).on( 'click', '#minimalistic', function() {
+            changeFontColor('#333');
+            changeBg('#FABE1D');
+            setCurrentColor('minimalistic');
+        });
+        
+        $( document ).on( 'click', '#dark', function() {
+            changeFontColor('#D4D4D4');
+            changeBg('#000');
+            setCurrentColor('dark');
+        });
+
     };
     
     
     var construct = function() {                                   // konstruktor
         events();
         load();                                                // wczytywanie danych z localStorage po wejściu na stronę - 1000ms / 30fps = 33
-        setInterval(update, 33);                             // wywołanie metody aktualizującej dane na stronie co 1 sekundę - 1000ms / 30fps = 33
-        setInterval(checkPizza, 33);                          // wywołanie metody sprawdzającej czy można się wklikać w dane ulepszenie czy nie co 0.1s
+        setInterval(update, 500);                             // wywołanie metody aktualizującej dane na stronie co 1 sekundę - 1000ms / 30fps = 33
+        setInterval(updateTitle, 500);
+        setInterval(checkPizza, 500);                          // wywołanie metody sprawdzającej czy można się wklikać w dane ulepszenie czy nie co 0.1s
         setInterval(save, 60000);                              // autozapis co 60 sekund
         setInterval(updateAutoClicks, 1000);                   // TO DO // nie wolno zmieniać wartości, inaczej wszystko się psuje :( :( :(
         

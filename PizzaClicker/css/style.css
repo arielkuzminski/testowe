@@ -11,14 +11,14 @@ body {
     font-family: 'Indie Flower', cursive;
     font-size: 18px;
     
-background: rgba(252,234,187,1);
-background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
-background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,234,187,1)), color-stop(33%, rgba(252,205,77,1)), color-stop(73%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
-background: -webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
-background: -o-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
-background: -ms-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
-background: linear-gradient(to bottom, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=0 );
+    background: #FABE1D;
+    background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,234,187,1)), color-stop(33%, rgba(252,205,77,1)), color-stop(73%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
+    background: -webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
+    background: -o-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
+    background: -ms-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
+    background: linear-gradient(to bottom, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=0 );
 
 }
 
@@ -83,6 +83,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
     
 }
 
@@ -120,6 +123,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
     .image {
         max-width: 300px;
     }
+    
+    #fancy {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 350px) {
@@ -131,6 +138,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
         width: inherit;
         height: 250px;
     }
+    
+    #fancy {
+        display: none;
+    }
+    
 }
 
 @media only screen and (max-width: 300px) {
@@ -142,4 +154,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', end
         width: inherit;
         height: 200px;
     }
+    
+    #fancy {
+        display: none;
+    }
+    
+    
 }
