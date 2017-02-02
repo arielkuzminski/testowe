@@ -153,7 +153,7 @@ function PizzaClickerGame() {
                 pizzaCount = pizzaCount - currentUpgrade.currentPrice;                                                  // aktualizujemy nasze 'saldo'
                 booster = booster + currentUpgrade.bonus;                                                         // aktualizujemy liczbę automatycznych kliknięć
                 currentUpgrade.itemCount++;                                                                             // inkrementujemy licznik tego konkretnego ulepszenia
-                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(1.15, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
+                currentUpgrade.currentPrice = (currentUpgrade.basePrice * (Math.pow(1.05, currentUpgrade.itemCount)));  // Pani Partyka byłaby ze mnie dumna...
                 currentUpgrade.currentPrice = Math.round(currentUpgrade.currentPrice);                                  // żeby był int a nie float
 
                 update();
@@ -385,7 +385,7 @@ function PizzaClickerGame() {
         
         $( document ).on( 'click', '#fancy', function() {
             changeFontColor('#333');
-            changeBg('-webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%)');
+            changeBg('-webkit-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 33%, rgba(248,181,0,1) 73%, rgba(251,223,147,1) 100%)fixed');
             setCurrentColor('fancy');
         });
         
