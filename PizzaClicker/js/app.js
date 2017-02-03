@@ -3,6 +3,7 @@ function PizzaClickerGame() {
     var pizzaCount = 0;                                         // główny licznik - liczba pizz :)
     var autoClick = 0;                                          // licznik automatycznych kliknięć na sekundę
     var booster = 0;
+    var score = 0;
     
     
     var upgrades = [                                                // każde z ulepszeń
@@ -78,8 +79,8 @@ function PizzaClickerGame() {
             idValue : '#cursor-value',
             idCount : '#cursorCount',
             itemCount : 0,
-            currentPrice : 100,
-            basePrice: 100,
+            currentPrice : 10,
+            basePrice: 10,
             bonus : 1
         },
         
@@ -123,7 +124,10 @@ function PizzaClickerGame() {
     var clickClicker = function() {                            //kliknięcie w clicker...
         
         pizzaCount++;
+        score++;
         pizzaCount = pizzaCount + booster;
+        score = score + booster;
+        
         update();
         
     };
@@ -219,6 +223,8 @@ function PizzaClickerGame() {
         
         $('#perSec').text(autoClick);                               // automatycznych kliknięć na sekundę
         $('#perClick').text(booster + 1);
+        $('#score').text(score);
+        
     };
     
     var updateTitle = function() {
@@ -232,6 +238,7 @@ function PizzaClickerGame() {
     
     var updateAutoClicks = function() { // do poprawki: metoda odpowiedzialna za dodanie automatycznych kliknięć do całkowitej liczby pizz - w razie zmiany SetInterval z 1 sekundy, wszystko zacznya źle działać :(
         pizzaCount = pizzaCount + autoClick;
+        score = score + autoClick;
     };
 
     ////////@@@@@@@@@@@@@@@@@@///////// TO DO ////////////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@///////////////////
@@ -240,6 +247,7 @@ function PizzaClickerGame() {
         localStorage.setItem('pizzaCount', pizzaCount);
         localStorage.setItem('autoClick', autoClick);
         localStorage.setItem('booster', booster);
+        localStorage.setItem('score', score);
         
         for(var i = 0; i < upgrades.length; i++) {
             localStorage.setItem(upgrades[i].name + 'Cost', upgrades[i].currentPrice);
@@ -287,6 +295,9 @@ function PizzaClickerGame() {
             booster = localStorage.getItem('booster');
             booster = parseInt(booster);
             
+            score = localStorage.getItem('score');
+            score = parseInt(score);
+            
            }
         else {                                                      // ... w przeciwnym wypadku zresetuj wynik
             reset();
@@ -302,6 +313,7 @@ function PizzaClickerGame() {
         localStorage.setItem('pizzaCount', 0);
         localStorage.setItem('autoClick', 0);
         localStorage.setItem('booster', 0);
+        localStorage.setItem('score', 0);
 		
 		for(var i = 0; i < upgrades.length; i++) {
             
@@ -399,6 +411,18 @@ function PizzaClickerGame() {
             changeFontColor('#D4D4D4');
             changeBg('#000');
             setCurrentColor('dark');
+        });
+        
+        $( document ).on( 'click', '#myBtn', function(){
+            $('#myModal').css('display', 'block');
+        });
+        
+        $( document ).on( 'click', '.close', function(){
+            $('#myModal').css('display', 'none');
+        });
+        
+        $( document ).on( 'click', '#myModal', function(){
+            $('#myModal').css('display', 'none');
         });
 
     };

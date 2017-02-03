@@ -39,6 +39,8 @@
         <p>You've got: <span class='counter' id="counter"></span> pizzas!</p>
         <p>(<span id='perSec'></span> per/second)</p>
         <p>(<span id='perClick'></span> per/click)</p>
+        <p>TOTAL SCORE: <span id='score'></span></p>
+        <input type="email" class="form-control" id="name" placeholder="Your name for Highscores" maxlength="12">
     </div>
     
     <div class="col-lg-4  col-sm-6 col-lg-pull-4">   
@@ -102,11 +104,8 @@
                 <button class="btn btn-success button" id="save">Save</button>
                 <button class="btn btn-warning button" id="load">Load</button>
                 <button class="btn btn-danger button" id="reset">RESET</button>
-                
-                
-                
                 <div class="dropup">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle button" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Themes
                     <span class="caret"></span>
                   </button>
@@ -117,7 +116,16 @@
                     <li role="separator" class="divider"></li>
                     <li><a href="#" id='currentColor'>fancy</a></li>
                   </ul>
-                </div>              
+                </div> 
+                
+                <button class="btn btn-primary button" id="myBtn">Highscores</button>
+                <div id="myModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                      <p></p>
+                  </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -137,6 +145,7 @@
 
     
 <script src="./js/app.js"></script>
+<script src="./js/ajax.js"></script>
     
 </body>
 </html>
